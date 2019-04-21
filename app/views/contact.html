@@ -1,33 +1,23 @@
-<div class="container" ng-app="ContactForm">
-
-  <h1 ng-style="header">We want to hear you!</h1>
-
-  <form name="cf">
-    <div class="form-group">
-      <label for="email">Email</label>
-      <input id="email" type="email" name="email" ng-model="email">
-    </div>
-
-    <div class="form-group">
-      <label for="phone">Phone Number</label>
-      <input id="phone" type="text" name="phone" ng-model="phone" required>
-    </div>
-
-    <div class="form-group">
-      <label for="subject">Subject</label>
-      <input id="subject" type="text" name="subject" ng-model="subject" required>
-    </div>
-
-    <div class="form-group">
-      <label for="msg">Message</label>
-      <textarea id="msg" name="message" rows="4" ng-model="message" required></textarea>
-    </div>
-
-    <div *ng-if="isFormValid">
-      <span style="color: red;">Some arguments are not valid, please fix them.</span>
-    </div>
-
-    <input type="submit" value="Send" ng-click="createContactDetails()" />
-  </form>
+<div class="wpcf7" id="wpcf7-f156-p143-o1 formwrap">
+    <h1>Have A Question?</h1>
+    <h2>Please leave a message below!</h2>
+      <form id = "ContactForm" class="wpcf7-form">
+          <p>
+             <span class="wpcf7-form-control-wrap Email">
+               <input type="text" name="email" ng-model="email" size="40" ng-click="clearEmailText()" class="emailinput wpcf7-form-control wpcf7-text wpcf7-validates-as-required" aria-required="true" aria-invalid="false" placeholder={{email}}>
+            </span>
+            <span class="wpcf7-form-control-wrap Phone">
+              <input type="text" name="phone" ng-model="phone"  size="40" ng-click="clearPhoneText()" class="phoneinput wpcf7-form-control wpcf7-text wpcf7-email wpcf7-validates-as-required" aria-required="true" aria-invalid="false" placeholder={{phone}}>
+            </span>
+            <span class="wpcf7-form-control-wrap Subject">
+                <input type="text" name="subject" ng-model="subject"  size="40" ng-click="clearSubjectText()" class="subjectinput wpcf7-form-control wpcf7-text wpcf7-email wpcf7-validates-as-required" aria-required="true" aria-invalid="false" placeholder={{subject}}>
+              </span>
+            <span class="wpcf7-form-control-wrap Message">
+              <textarea name="message" ng-model="message" cols="40" rows="10" ng-click="clearMessageText()" class="wpcf7-form-control wpcf7-textarea" aria-required="true" aria-invalid="false" placeholder={{message}}></textarea>
+            </span>
+            <input type="submit" value="Send" ng-click="createContactDetails()" class="wpcf7-form-control wpcf7-submit btn">
+        </p>
+    </form>
+  </div>
 
 </div>

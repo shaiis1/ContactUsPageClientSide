@@ -1,5 +1,6 @@
 'use strict';
 
+
 /**
  * @ngdoc function
  * @name softwaveClientSideAngularJsApp.controller:ContactCtrl
@@ -16,10 +17,10 @@ angular.module('softwaveClientSideAngularJsApp')
         "text-align": "center"
       };
 
-      $scope.email = '';
-      $scope.phone = '';
-      $scope.subject = '';
-      $scope.message = '';
+      $scope.email = 'Email';
+      $scope.phone = 'Phone Number';
+      $scope.subject = 'Subject';
+      $scope.message = 'Message';
       $scope.isFormValid = true;
 
       $scope.createContactDetails = function () {
@@ -27,10 +28,15 @@ angular.module('softwaveClientSideAngularJsApp')
         if (!isArgumentsValid()) {
           $scope.isFormValid = false;
           console.error('Some arguments are not valid, aborting.');
+          $scope.email = 'Email';
+          $scope.phone = 'Phone Number';
+          $scope.subject = 'Subject';
+          $scope.message = 'Message';
           return;
         }
 
-
+        else
+        {
         const messageDetails = {
           m_email: $scope.email,
           m_phoneNumber: $scope.phone,
@@ -39,6 +45,23 @@ angular.module('softwaveClientSideAngularJsApp')
         }
 
         HttpService.post('/createdetail', messageDetails);
+       }
+      }
+
+      $scope.clearEmailText = function(){
+        $scope.email = '';
+      }
+
+      $scope.clearPhoneText = function(){
+        $scope.phone = '';
+      }
+
+      $scope.clearSubjectText = function(){
+        $scope.subject = '';
+      }
+
+      $scope.clearMessageText = function(){
+        $scope.message = '';
       }
 
       function isStringValid(str) {
