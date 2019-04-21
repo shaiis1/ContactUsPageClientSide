@@ -1,0 +1,33 @@
+<div class="container" ng-app="ContactForm">
+
+  <h1 ng-style="header">We want to hear you!</h1>
+
+  <form name="cf">
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input id="email" type="email" name="email" ng-model="email">
+    </div>
+
+    <div class="form-group">
+      <label for="phone">Phone Number</label>
+      <input id="phone" type="text" name="phone" ng-model="phone" required>
+    </div>
+
+    <div class="form-group">
+      <label for="subject">Subject</label>
+      <input id="subject" type="text" name="subject" ng-model="subject" required>
+    </div>
+
+    <div class="form-group">
+      <label for="msg">Message</label>
+      <textarea id="msg" name="message" rows="4" ng-model="message" required></textarea>
+    </div>
+
+    <div *ng-if="isFormValid">
+      <span style="color: red;">Some arguments are not valid, please fix them.</span>
+    </div>
+
+    <input type="submit" value="Send" ng-click="createContactDetails()" />
+  </form>
+
+</div>
