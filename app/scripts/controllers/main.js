@@ -8,4 +8,4 @@
  * Controller of the softwaveClientSideAngularJsApp
  */
 angular.module('softwaveClientSideAngularJsApp')
-  .controller('MainCtrl');
+  .controller('MainCtrl',function(){});

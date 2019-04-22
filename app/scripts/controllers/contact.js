@@ -1,6 +1,5 @@
 'use strict';
 
-
 /**
  * @ngdoc function
  * @name softwaveClientSideAngularJsApp.controller:ContactCtrl
@@ -9,13 +8,8 @@
  * Controller of the softwaveClientSideAngularJsApp
  */
 angular.module('softwaveClientSideAngularJsApp')
-  .controller('ContactCtrl', ['$scope', 'HttpService',
-    function ($scope, HttpService) {
-
-      $scope.header = {
-        "color": "#4a4",
-        "text-align": "center"
-      };
+  .controller('ContactCtrl', ['$scope', 'HttpService', '$location',
+    function ($scope, HttpService, $location) {
 
       $scope.email = 'Email';
       $scope.phone = 'Phone Number';
@@ -33,34 +27,33 @@ angular.module('softwaveClientSideAngularJsApp')
           $scope.subject = 'Subject';
           $scope.message = 'Message';
           return;
-        }
+        } else {
+          const messageDetails = {
+            m_email: $scope.email,
+            m_phoneNumber: $scope.phone,
+            m_subject: $scope.subject,
+            m_content: $scope.message
+          }
 
-        else
-        {
-        const messageDetails = {
-          m_email: $scope.email,
-          m_phoneNumber: $scope.phone,
-          m_subject: $scope.subject,
-          m_content: $scope.message
+          HttpService.post('/createdetail', messageDetails);
+          alert("Thanks!" +" "+ $scope.email +"\nYour message has been sent and will be answered soon!")
+          $location.path('/');
         }
-
-        HttpService.post('/createdetail', messageDetails);
-       }
       }
 
-      $scope.clearEmailText = function(){
+      $scope.clearEmailText = function () {
         $scope.email = '';
       }
 
-      $scope.clearPhoneText = function(){
+      $scope.clearPhoneText = function () {
         $scope.phone = '';
       }
 
-      $scope.clearSubjectText = function(){
+      $scope.clearSubjectText = function () {
         $scope.subject = '';
       }
 
-      $scope.clearMessageText = function(){
+      $scope.clearMessageText = function () {
         $scope.message = '';
       }
 
@@ -73,12 +66,32 @@ angular.module('softwaveClientSideAngularJsApp')
       }
 
       function isArgumentsValid() {
-        if (isStringValid($scope.email)
-          || isStringValid($scope.phone)
-          || isStringValid($scope.subject)
-          || isStringValid($scope.message)) {
+        if (isValidEmail($scope.email)
+          && isValidPhoneNumber($scope.phone)
+          && isStringValid($scope.subject)
+          && isStringValid($scope.message)) {
           return true;
         } else {
+          return false;
+        }
+      }
+
+      function isValidEmail(str) {
+        if ((/^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9_\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/.test(str)) || str == "" || str == null) {
+          return true;
+        }
+        else {
+          alert("Please enter a valid email");
+          return false;
+        }
+      }
+
+      function isValidPhoneNumber(str) {
+        if ((/^(?:\+?(\d{1,3}))?([-. (]*(\d{3})[-. )]*)?((\d{3})[-. ]*(\d{2,4})(?:[-.x ]*(\d+))?)$/.test(str)) || str == "" || str == null) {
+          return true;
+        }
+        else {
+          window.alert("invalid phone number");
           return false;
         }
       }
